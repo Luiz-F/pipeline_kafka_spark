@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  spark:
+    image: bitnami/spark
+    container_name: spark_master
+    hostname: spark_master
+    user: root
+    ports:
+      - '8085:8080'
+    volumes:
+      - ./sparkconf/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+      - ./python/jars:/opt/bitnami/spark/ivy:z
+    networks:
+      - projstream
+
+networks: 
+  projstream:
+    name: projstream
