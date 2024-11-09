@@ -15,8 +15,8 @@ services:
     ports:
       - '8085:8080'
     volumes:
-      - ./sparkconf/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
-      - ./python/jars:/opt/bitnami/spark/ivy:z
+      - ./spark-conf/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+      - ./spark-jars/:/opt/bitnami/spark/ivy:z
     networks:
       - kafka_stream
 
