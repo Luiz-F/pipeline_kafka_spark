@@ -51,6 +51,7 @@ services:
       container_name: broker
       depends_on:
         - zookeeper
+        - zookeeper2
       ports:
         - "29092:29092"
         - "9092:9092"
@@ -59,7 +60,7 @@ services:
         KAFKA_BROKER_ID: 1
         KAFKA_ZOOKEEPER_CONNECT: 'zookeeper1:2181,zookeeper2:2182'
         KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-        KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092
+        KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT://localhost:29092
         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
         KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
         KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -74,6 +75,7 @@ services:
     hostname: broker2
     container_name: broker2
     depends_on:
+      - zookeeper
       - zookeeper2
     ports:
       - "29093:29093"
@@ -83,7 +85,7 @@ services:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper1:2181,zookeeper2:2182'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker2:29093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker2:29093,,PLAINTEXT://localhost:29093
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
